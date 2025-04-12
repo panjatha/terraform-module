@@ -12,7 +12,7 @@ stages:
         echo "Checking Terraform version..."
         C:\terraform_1.11.0_windows_amd64\terraform.exe --version
       displayName: "Verify Terraform Installation"
-    - task: Init
+    - task: TerraformTaskV4@4
       inputs:     
         provider: 'azurerm'
         command: 'init'
@@ -22,12 +22,12 @@ stages:
         backendAzureRmStorageAccountName: 'mandeepstoragepip'
         backendAzureRmContainerName: 'mandeep-container'
         backendAzureRmKey: 'yaml.tfstate'
-    - task: Validate
+    - task: TerraformTaskV4@4
       inputs:
         provider: 'azurerm'
         command: 'validate'
         workingDirectory: 'Parent'
-    - task: Plan
+    - task: TerraformTaskV4@4
       inputs:
         provider: 'azurerm'
         command: 'plan'
